@@ -61,7 +61,6 @@ const Clock = () => {
             <h1 className="text-white fs-3 mb-2">{seconds} </h1>
             <h1 className="text-white fs-6">Seconds</h1>
           </div>
-          <span className="text-white fs-1">:</span>
         </div>
       </div>
     </>
