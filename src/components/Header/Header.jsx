@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion'
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { useNavigate, NavLink } from 'react-router-dom'
 import { Container, Row } from 'reactstrap'
 import logo from '../../assets/images/eco-logo.png'
 import userIcon from '../../assets/images/user-icon.png'
 
 import { useEffect, useRef } from 'react'
 import './Header.css'
+import { useSelector } from 'react-redux'
 
 const nav__links = [
   {
@@ -25,6 +26,10 @@ const nav__links = [
 
 const Header = () => {
   const headerRef = useRef(null)
+  const menuRef = useRef(null)
+  const navigate = useNavigate()
+  const totalQuantity = useSelector(state => state.cart.totalQuantity)
+
   const stickyHeaderFunc = () => {
     window.addEventListener('scroll', () => {
       if (
@@ -43,8 +48,11 @@ const Header = () => {
     return () => window.removeEventListener('scroll', stickyHeaderFunc)
   }, [])
 
-  const menuRef = useRef(null)
   const menuToggle = () => menuRef.current.classList.toggle('active__menu')
+
+  const navigateToCart = () => {
+    navigate('/cart')
+  }
 
   return (
     <>
@@ -79,9 +87,9 @@ const Header = () => {
                   <i class="ri-heart-line"></i>
                   <span className="badge">1</span>
                 </span>
-                <span className="cart__icon">
+                <span className="cart__icon" onClick={navigateToCart}>
                   <i class="ri-shopping-bag-line"></i>
-                  <span className="badge">1</span>
+                  <span className="badge">{totalQuantity}</span>
                 </span>
                 <span>
                   {/* click chuyen dong anh */}
